@@ -10,4 +10,6 @@ import UIKit
 struct ImagePalette {
     static let pizza = UIImage(named: "pizza.png") ?? .strokedCheckmark
     static let hamburger = UIImage(named: "hamburger.png") ?? .strokedCheckmark
+    static let spagethi = UIImage(named: "spagethi.png") ?? .strokedCheckmark
+    static let sushi = UIImage(named: "sushi.jpeg") ?? .strokedCheckmark
 }

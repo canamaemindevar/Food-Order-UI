@@ -7,39 +7,30 @@
 
 import UIKit
 
-final class HorizontalCollectionViewCell: UICollectionViewCell {
-    static let identifier = "HorizontalCollectionViewCell"
+final class MostPopularCollectionViewCell: UICollectionViewCell {
+    static let identifier = "MostPopularCollectionViewCell"
 
     //MARK: - Varibles
     var item: ListItem? {
         didSet {
-            nameLabel.text = item?.title
+            nameLabel.name = item?.title
             nameLabel.layer.cornerRadius = 20
             imageView.image = item?.image
-            categoryLabel.text = "Western"
+            categoryView.categoryName = "Western"
             ratingView.ratingScore = "4.9"
+            typeView.categoryName = "Cafe"
         }
     }
 
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textAlignment = .center
+    private let nameLabel: NameView = {
+        let label = NameView()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.textColor = .darkGray
         return label
     }()
-    private let categoryLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 15, weight: .medium)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.textColor = .lightGray
-        return label
+    private let categoryView: CategoryView = {
+        let categoryView = CategoryView()
+        categoryView.translatesAutoresizingMaskIntoConstraints = false
+        return categoryView
     }()
     
     private let ratingView: RatingView = {
@@ -56,6 +47,12 @@ final class HorizontalCollectionViewCell: UICollectionViewCell {
         iv.tintColor = .label
         return iv
     }()
+    private let typeView: RestaurantTypeView = {
+        let typeView = RestaurantTypeView()
+        typeView.translatesAutoresizingMaskIntoConstraints = false
+        return typeView
+    }()
+
     private let dummyView: UIView = {
         let iv = UIView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -78,10 +75,10 @@ final class HorizontalCollectionViewCell: UICollectionViewCell {
     private let horizantalStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.translatesAutoresizingMaskIntoConstraints = false
-        stackview.distribution = .equalCentering
+        stackview.distribution = .fillEqually
         stackview.axis = .horizontal
         stackview.alignment = .bottom
-        stackview.spacing = 4
+        stackview.spacing = 12
         return stackview
     }()
 
@@ -106,14 +103,9 @@ final class HorizontalCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         verticalStackView.addArrangedSubview(nameLabel)
         verticalStackView.addArrangedSubview(horizantalStackView)
-        horizantalStackView.addArrangedSubview(categoryLabel)
-        let spacer = UIView()
-        spacer.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        horizantalStackView.addArrangedSubview(spacer)
+        horizantalStackView.addArrangedSubview(typeView)
+        horizantalStackView.addArrangedSubview(categoryView)
         horizantalStackView.addArrangedSubview(ratingView)
-        let spacer2 = UIView()
-        spacer2.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        horizantalStackView.addArrangedSubview(spacer2)
 
         NSLayoutConstraint.activate([
             dummyView.topAnchor.constraint(equalTo: contentView.topAnchor),

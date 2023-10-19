@@ -12,8 +12,8 @@ struct MockData {
 
     private let categories: ListSection = {
         .categories([.init(title: "Offers", image: ImagePalette.pizza),
-                     .init(title: "Italian", image: ImagePalette.hamburger),
-                     .init(title: "Indian", image: ImagePalette.pizza),
+                     .init(title: "Italian", image: ImagePalette.spagethi),
+                     .init(title: "Indian", image: ImagePalette.sushi),
                      .init(title: "Turkish", image: ImagePalette.hamburger),
                      .init(title: "Fast Food", image: ImagePalette.pizza),
                      .init(title: "French", image: ImagePalette.hamburger),
@@ -23,18 +23,18 @@ struct MockData {
 
     private let popularRestaurants: ListSection = {
         .popularRestaurants([.init(title: "Minute by tuk tuk", image: ImagePalette.hamburger),
-                             .init(title: "Cafe de Noir", image: ImagePalette.pizza),
+                             .init(title: "Cafe de Noir", image: ImagePalette.spagethi),
                              .init(title: "Bakes by Tella", image: ImagePalette.pizza),
                              .init(title: "Pizza Hut", image: ImagePalette.hamburger),
-                             .init(title: "Turkish Kebab", image: ImagePalette.pizza)])
+                             .init(title: "Turkish Kebab", image: ImagePalette.sushi)])
     }()
 
     private let mostPopular: ListSection = {
-        .mostPopular([.init(title: "Cafe De Bambaa", image: ImagePalette.pizza),
+        .mostPopular([.init(title: "Cafe De Bambaa", image: ImagePalette.spagethi),
                       .init(title: "Burger by Burger King", image: ImagePalette.pizza),
-                      .init(title: "Mc Donalds", image: ImagePalette.pizza),
+                      .init(title: "Mc Donalds", image: ImagePalette.spagethi),
                       .init(title: "Western Food", image: ImagePalette.hamburger),
-                      .init(title: "Sushi by Japan", image: ImagePalette.pizza)])
+                      .init(title: "Sushi by Japan", image: ImagePalette.sushi)])
     }()
 
     private let recent: ListSection = {

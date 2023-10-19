@@ -7,47 +7,44 @@
 
 import UIKit
 
-final class MainVerticalCollectionView: UICollectionViewCell {
+final class PopularRestaurentCollectionViewCell: UICollectionViewCell {
 
-    static let identifier = "MainVerticalCollectionView"
+    static let identifier = "PopularRestaurentCollectionViewCell"
 
     //MARK: - Varibles
     var item: ListItem? {
         didSet {
-            nameLabel.text = item?.title
+            nameLabel.name = item?.title
             nameLabel.layer.cornerRadius = 20
             imageView.image = item?.image
-            categoryLabel.text = "Western Food"
+            categoryView.categoryName = "Western Food"
             ratingView.ratingScore = "4.0"
-            ratingView.totalRates =  "(129 ratings)"
+            ratingView.totalRates =  "129"
+            typeView.categoryName = "Cafe"
         }
     }
 
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textAlignment = .center
+    private let nameLabel: NameView = {
+        let label = NameView()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.textColor = .darkGray
         return label
     }()
-    private let categoryLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.textColor = .lightGray
-        return label
+    private let categoryView: CategoryView = {
+        let categoryView = CategoryView()
+        categoryView.translatesAutoresizingMaskIntoConstraints = false
+        return categoryView
     }()
 
     private let ratingView: RatingView = {
         let ratingView = RatingView()
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         return ratingView
+    }()
+
+    private let typeView: RestaurantTypeView = {
+        let typeView = RestaurantTypeView()
+        typeView.translatesAutoresizingMaskIntoConstraints = false
+        return typeView
     }()
 
     private let imageView: UIImageView = {
@@ -82,8 +79,8 @@ final class MainVerticalCollectionView: UICollectionViewCell {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         stackview.distribution = .fillEqually
         stackview.axis = .horizontal
-        stackview.alignment = .bottom
-        stackview.spacing = 80
+        stackview.alignment = .fill
+        stackview.spacing = 20
         return stackview
     }()
 
@@ -109,7 +106,8 @@ final class MainVerticalCollectionView: UICollectionViewCell {
         verticalStackView.addArrangedSubview(nameLabel)
         verticalStackView.addArrangedSubview(horizantalStackView)
         horizantalStackView.addArrangedSubview(ratingView)
-        horizantalStackView.addArrangedSubview(categoryLabel)
+        horizantalStackView.addArrangedSubview(typeView)
+        horizantalStackView.addArrangedSubview(categoryView)
 
         NSLayoutConstraint.activate([
             dummyView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -131,7 +129,7 @@ final class MainVerticalCollectionView: UICollectionViewCell {
         ])
         NSLayoutConstraint.activate([
             verticalStackView.leadingAnchor.constraint(equalTo: dummyView2.leadingAnchor,constant: 16),
-            verticalStackView.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor,constant: 16),
+            verticalStackView.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor,constant: 4),
             verticalStackView.topAnchor.constraint(equalTo: dummyView2.topAnchor),
             verticalStackView.bottomAnchor.constraint(equalTo: dummyView2.bottomAnchor)
         ])

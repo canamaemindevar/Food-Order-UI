@@ -11,13 +11,16 @@ final class RatingView: UIView {
 
     var ratingScore: String? {
         didSet {
-            ratingLabel.text = "4.0"
+            ratingLabel.text = ratingScore
         }
     }
     var totalRates: String? {
         didSet {
-            totalRatingCount.text = "(129 rating)"
+            if let totalRates{
+                totalRatingCount.text = "(\(totalRates) rating)"
+            }
         }
+
     }
 
     private let starImageView: UIImageView = {

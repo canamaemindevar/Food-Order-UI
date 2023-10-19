@@ -14,40 +14,37 @@ final class RecentItemsCollectionViewCell: UICollectionViewCell {
     //MARK: - Varibles
     var item: ListItem? {
         didSet {
-            nameLabel.text = item?.title
+            nameLabel.name = item?.title
             nameLabel.layer.cornerRadius = 20
             imageView.image = item?.image
-            categoryLabel.text = "Western"
+            categoryView.categoryName = "Western"
             ratingView.ratingScore = "4.0"
-            ratingView.totalRates =  "(129 ratings)"
+            ratingView.totalRates =  "129"
+            typeView.categoryName = "Cafe"
         }
     }
 
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textAlignment = .center
+    private let nameLabel: NameView = {
+        let label = NameView()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.textColor = .darkGray
         return label
     }()
-    private let categoryLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 15, weight: .medium)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.textColor = .lightGray
-        return label
+    private let categoryView: CategoryView = {
+        let categoryView = CategoryView()
+        categoryView.translatesAutoresizingMaskIntoConstraints = false
+        return categoryView
     }()
     
     private let ratingView: RatingView = {
         let ratingView = RatingView()
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         return ratingView
+    }()
+
+    private let typeView: RestaurantTypeView = {
+        let typeView = RestaurantTypeView()
+        typeView.translatesAutoresizingMaskIntoConstraints = false
+        return typeView
     }()
 
     private let imageView: UIImageView = {
@@ -76,6 +73,15 @@ final class RecentItemsCollectionViewCell: UICollectionViewCell {
         stackview.alignment = .leading
         return stackview
     }()
+    private let horizantalStackView: UIStackView = {
+        let stackview = UIStackView()
+        stackview.translatesAutoresizingMaskIntoConstraints = false
+        stackview.distribution = .fillEqually
+        stackview.axis = .horizontal
+        stackview.alignment = .fill
+        stackview.spacing = 4
+        return stackview
+    }()
 
     //MARK: - Init funcs
     override init(frame: CGRect) {
@@ -97,7 +103,9 @@ final class RecentItemsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(verticalStackView)
         contentView.addSubview(imageView)
         verticalStackView.addArrangedSubview(nameLabel)
-        verticalStackView.addArrangedSubview(categoryLabel)
+        verticalStackView.addArrangedSubview(horizantalStackView)
+        horizantalStackView.addArrangedSubview(typeView)
+        horizantalStackView.addArrangedSubview(categoryView)
         verticalStackView.addArrangedSubview(ratingView)
 
         NSLayoutConstraint.activate([
