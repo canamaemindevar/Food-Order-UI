@@ -14,12 +14,20 @@ final class MainPageViewController: UIViewController {
     private let sections = MockData.shared.pageData
 
     //MARK: - Components
-    let mainCollectionView: UICollectionView = {
+
+    private let mainPageHeader: MainPageHeader = {
+        let mainPageHeader = MainPageHeader()
+        mainPageHeader.translatesAutoresizingMaskIntoConstraints = false
+        return mainPageHeader
+    }()
+
+    private let mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.layer.cornerRadius = 5
         collection.backgroundColor = .clear
+        collection.showsVerticalScrollIndicator = false
         collection.register(MainVerticalCollectionView.self, forCellWithReuseIdentifier: MainVerticalCollectionView.identifier)
         collection.register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: CategoriesCollectionViewCell.identifier)
         collection.register(HorizontalCollectionViewCell.self, forCellWithReuseIdentifier: HorizontalCollectionViewCell.identifier)
@@ -38,10 +46,23 @@ private extension MainPageViewController {
     func setup() {
         view.backgroundColor = .white
         view.addSubview(mainCollectionView)
-        self.mainCollectionView.frame = view.bounds
+        view.addSubview(mainPageHeader)
         mainCollectionView.dataSource = self
         mainCollectionView.delegate = self
         mainCollectionView.collectionViewLayout = createLayout()
+
+        NSLayoutConstraint.activate([
+            mainPageHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 16),
+            mainPageHeader.topAnchor.constraint(equalTo: view.topAnchor,constant: 16),
+            view.trailingAnchor.constraint(equalTo: mainPageHeader.trailingAnchor,constant: 16),
+            mainPageHeader.heightAnchor.constraint(equalToConstant: view.frame.height / 10)
+        ])
+        NSLayoutConstraint.activate([
+            mainCollectionView.topAnchor.constraint(equalTo: mainPageHeader.bottomAnchor),
+            mainCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: mainCollectionView.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: mainCollectionView.bottomAnchor)
+        ])
     }
 }
 
@@ -87,7 +108,6 @@ extension MainPageViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension MainPageViewController: UICollectionViewDelegate {}
 
-
 // MARK: - UICollectionViewCompositionalLayout
 private extension MainPageViewController {
 
@@ -124,7 +144,6 @@ private extension MainPageViewController {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top)
 
-
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: 32, leading: 0, bottom: 32, trailing: 0)
         section.boundarySupplementaryItems = [header]
@@ -153,7 +172,6 @@ private extension MainPageViewController {
         section.boundarySupplementaryItems = [header]
         section.contentInsets = .init(top: 16, leading: 12, bottom: 16, trailing: 12)
         section.orthogonalScrollingBehavior = .continuous
-
         return section
     }
 }
