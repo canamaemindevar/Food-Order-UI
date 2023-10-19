@@ -17,49 +17,39 @@ final class MainVerticalCollectionView: UICollectionViewCell {
             nameLabel.text = item?.title
             nameLabel.layer.cornerRadius = 20
             imageView.image = item?.image
-            categoryLabel.text = "Western"
-            ratingLabel.text = "4.9 (129 ratings) "
+            categoryLabel.text = "Western Food"
+            ratingView.ratingScore = "4.0"
+            ratingView.totalRates =  "(129 ratings)"
         }
     }
 
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
-        label.textColor = .black
+        label.textColor = .darkGray
         return label
     }()
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
-        label.textColor = .systemGray3
+        label.textColor = .lightGray
         return label
     }()
-    private let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.textColor = .black
-        return label
+
+    private let ratingView: RatingView = {
+        let ratingView = RatingView()
+        ratingView.translatesAutoresizingMaskIntoConstraints = false
+        return ratingView
     }()
-    private let starImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.image = UIImage(systemName: "star.fill")
-        iv.contentMode = .scaleAspectFit
-        iv.tintColor = .systemOrange
-        return iv
-    }()
+
     private let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -90,10 +80,10 @@ final class MainVerticalCollectionView: UICollectionViewCell {
     private let horizantalStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.translatesAutoresizingMaskIntoConstraints = false
-        stackview.distribution = .equalCentering
+        stackview.distribution = .fillEqually
         stackview.axis = .horizontal
-        stackview.alignment = .leading
-        stackview.spacing = 4
+        stackview.alignment = .bottom
+        stackview.spacing = 80
         return stackview
     }()
 
@@ -118,11 +108,7 @@ final class MainVerticalCollectionView: UICollectionViewCell {
         contentView.addSubview(imageView)
         verticalStackView.addArrangedSubview(nameLabel)
         verticalStackView.addArrangedSubview(horizantalStackView)
-        horizantalStackView.addArrangedSubview(starImageView)
-        horizantalStackView.addArrangedSubview(ratingLabel)
-        let spacer = UIView()
-        spacer.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        horizantalStackView.addArrangedSubview(spacer)
+        horizantalStackView.addArrangedSubview(ratingView)
         horizantalStackView.addArrangedSubview(categoryLabel)
 
         NSLayoutConstraint.activate([
@@ -144,8 +130,8 @@ final class MainVerticalCollectionView: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: dummyView.bottomAnchor)
         ])
         NSLayoutConstraint.activate([
-            verticalStackView.leadingAnchor.constraint(equalTo: dummyView2.leadingAnchor),
-            verticalStackView.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor),
+            verticalStackView.leadingAnchor.constraint(equalTo: dummyView2.leadingAnchor,constant: 16),
+            verticalStackView.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor,constant: 16),
             verticalStackView.topAnchor.constraint(equalTo: dummyView2.topAnchor),
             verticalStackView.bottomAnchor.constraint(equalTo: dummyView2.bottomAnchor)
         ])

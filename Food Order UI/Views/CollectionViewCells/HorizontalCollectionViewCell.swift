@@ -17,48 +17,37 @@ final class HorizontalCollectionViewCell: UICollectionViewCell {
             nameLabel.layer.cornerRadius = 20
             imageView.image = item?.image
             categoryLabel.text = "Western"
-            ratingLabel.text = "4.9"
+            ratingView.ratingScore = "4.9"
         }
     }
 
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
-        label.textColor = .black
+        label.textColor = .darkGray
         return label
     }()
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = .systemFont(ofSize: 15, weight: .medium)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
-        label.textColor = .systemGray3
+        label.textColor = .lightGray
         return label
     }()
-    private let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.textColor = .black
-        return label
+    
+    private let ratingView: RatingView = {
+        let ratingView = RatingView()
+        ratingView.translatesAutoresizingMaskIntoConstraints = false
+        return ratingView
     }()
-    private let starImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.image = UIImage(systemName: "star.fill")
-        iv.contentMode = .scaleAspectFit
-        iv.tintColor = .systemOrange
-        return iv
-    }()
+    
     private let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +80,7 @@ final class HorizontalCollectionViewCell: UICollectionViewCell {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         stackview.distribution = .equalCentering
         stackview.axis = .horizontal
-        stackview.alignment = .leading
+        stackview.alignment = .bottom
         stackview.spacing = 4
         return stackview
     }()
@@ -121,11 +110,10 @@ final class HorizontalCollectionViewCell: UICollectionViewCell {
         let spacer = UIView()
         spacer.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         horizantalStackView.addArrangedSubview(spacer)
+        horizantalStackView.addArrangedSubview(ratingView)
         let spacer2 = UIView()
         spacer2.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         horizantalStackView.addArrangedSubview(spacer2)
-        horizantalStackView.addArrangedSubview(starImageView)
-        horizantalStackView.addArrangedSubview(ratingLabel)
 
         NSLayoutConstraint.activate([
             dummyView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -146,8 +134,8 @@ final class HorizontalCollectionViewCell: UICollectionViewCell {
             imageView.bottomAnchor.constraint(equalTo: dummyView.bottomAnchor)
         ])
         NSLayoutConstraint.activate([
-            verticalStackView.leadingAnchor.constraint(equalTo: dummyView2.leadingAnchor),
-            verticalStackView.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor),
+            verticalStackView.leadingAnchor.constraint(equalTo: dummyView2.leadingAnchor,constant: 4),
+            verticalStackView.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor,constant: 4),
             verticalStackView.topAnchor.constraint(equalTo: dummyView2.topAnchor),
             verticalStackView.bottomAnchor.constraint(equalTo: dummyView2.bottomAnchor)
         ])

@@ -12,18 +12,18 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
 
     var item: ListItem? {
         didSet {
-            label.text = item?.title
+            categoryNamelabel.text = item?.title
             imageView.image = item?.image
         }
     }
-    private let label: UILabel = {
+    private let categoryNamelabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .clear
-        label.textColor = .black
+        label.textColor = .darkGray
         return label
     }()
     private let imageView: UIImageView = {
@@ -57,11 +57,11 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
 
     private func setConts() {
         contentView.backgroundColor = .clear
-        label.layer.cornerRadius = 20
+        categoryNamelabel.layer.cornerRadius = 20
         contentView.addSubview(dummyView)
         contentView.addSubview(dummyView2)
         contentView.addSubview(imageView)
-        contentView.addSubview(label)
+        contentView.addSubview(categoryNamelabel)
 
         NSLayoutConstraint.activate([
             dummyView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 8),
@@ -84,10 +84,10 @@ final class CategoriesCollectionViewCell: UICollectionViewCell {
         ])
 
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: dummyView2.leadingAnchor),
-            label.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor),
-            label.topAnchor.constraint(equalTo: dummyView2.topAnchor),
-            label.bottomAnchor.constraint(equalTo: dummyView2.bottomAnchor)
+            categoryNamelabel.leadingAnchor.constraint(equalTo: dummyView2.leadingAnchor),
+            categoryNamelabel.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor),
+            categoryNamelabel.topAnchor.constraint(equalTo: dummyView2.topAnchor),
+            categoryNamelabel.bottomAnchor.constraint(equalTo: dummyView2.bottomAnchor)
         ])
     }
 }
