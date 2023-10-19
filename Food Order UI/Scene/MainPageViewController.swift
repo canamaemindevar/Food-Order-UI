@@ -31,6 +31,7 @@ final class MainPageViewController: UIViewController {
         collection.register(MainVerticalCollectionView.self, forCellWithReuseIdentifier: MainVerticalCollectionView.identifier)
         collection.register(CategoriesCollectionViewCell.self, forCellWithReuseIdentifier: CategoriesCollectionViewCell.identifier)
         collection.register(HorizontalCollectionViewCell.self, forCellWithReuseIdentifier: HorizontalCollectionViewCell.identifier)
+        collection.register(RecentItemsCollectionViewCell.self, forCellWithReuseIdentifier: RecentItemsCollectionViewCell.identifier)
         collection.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.identifier)
         return collection
     }()
@@ -87,7 +88,7 @@ extension MainPageViewController: UICollectionViewDataSource {
                 cell.item = items[indexPath.row]
                 return cell
             case .recentRestaurants(let items):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainVerticalCollectionView.identifier, for: indexPath) as? MainVerticalCollectionView else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentItemsCollectionViewCell.identifier, for: indexPath) as? RecentItemsCollectionViewCell else { return UICollectionViewCell() }
                 cell.item = items[indexPath.row]
                 return cell
         }
