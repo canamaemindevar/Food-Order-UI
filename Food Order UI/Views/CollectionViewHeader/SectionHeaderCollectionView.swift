@@ -14,8 +14,8 @@ final class SectionHeader: UICollectionReusableView {
     private let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .darkGray
+        label.font = .systemFont(ofSize: 22, weight: .bold)
         label.sizeToFit()
         return label
     }()

@@ -21,6 +21,18 @@ final class MainPageViewController: UIViewController {
         return mainPageHeader
     }()
 
+    private let searchBar: SearchBar = {
+        let searchBar = SearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+
     private let mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -46,6 +58,7 @@ final class MainPageViewController: UIViewController {
 private extension MainPageViewController {
     func setup() {
         view.backgroundColor = .white
+        view.addSubview(searchBar)
         view.addSubview(mainCollectionView)
         view.addSubview(mainPageHeader)
         mainCollectionView.dataSource = self
@@ -55,11 +68,18 @@ private extension MainPageViewController {
         NSLayoutConstraint.activate([
             mainPageHeader.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 16),
             mainPageHeader.topAnchor.constraint(equalTo: view.topAnchor,constant: 16),
-            view.trailingAnchor.constraint(equalTo: mainPageHeader.trailingAnchor,constant: 16),
+            view.trailingAnchor.constraint(equalTo: mainPageHeader.trailingAnchor,constant: 12),
             mainPageHeader.heightAnchor.constraint(equalToConstant: view.frame.height / 10)
         ])
         NSLayoutConstraint.activate([
-            mainCollectionView.topAnchor.constraint(equalTo: mainPageHeader.bottomAnchor),
+            searchBar.topAnchor.constraint(equalTo: mainPageHeader.bottomAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: mainCollectionView.leadingAnchor,constant: 12),
+            searchBar.trailingAnchor.constraint(equalTo: mainCollectionView.trailingAnchor,constant: -12),
+            searchBar.heightAnchor.constraint(equalToConstant: view.frame.height / 18)
+
+        ])
+        NSLayoutConstraint.activate([
+            mainCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             mainCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: mainCollectionView.trailingAnchor),
             view.bottomAnchor.constraint(equalTo: mainCollectionView.bottomAnchor)

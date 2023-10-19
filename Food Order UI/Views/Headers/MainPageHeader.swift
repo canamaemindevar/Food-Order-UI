@@ -21,16 +21,17 @@ class MainPageHeader: UIView {
     private let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 26, weight: .bold)
         label.text = "Welcome!"
         label.textColor = .darkGray
         return label
     }()
 
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "cart.fill")
-        imageView.tintColor = .darkGray
-        return imageView
+    private let cardImage: UIButton = {
+        let cardImage = UIButton()
+        cardImage.setImage(UIImage(systemName: "cart.fill"), for: .normal)
+        cardImage.tintColor = .darkGray
+        return cardImage
     }()
 
     override init(frame: CGRect) {
@@ -45,7 +46,7 @@ class MainPageHeader: UIView {
     private func setup() {
         addSubview(stackView)
         stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(cardImage)
 
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: topAnchor),
